@@ -1,0 +1,15 @@
+{
+  "name": "Startup-Informa",
+  "description": "This extension provides details about startup",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon":"logo.png",
+    "default_title": "Informa",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
