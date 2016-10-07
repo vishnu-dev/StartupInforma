@@ -8,7 +8,7 @@ function(array_of_Tabs) {
     var tab = array_of_Tabs[0];
     chrome.tabs.executeScript(tab.id, 
     	{
-    		code: "chrome.storage.sync.set({'info':{'image':document.getElementsByClassName('company-logo')[0].innerHTML,'title':document.getElementsByClassName('js-startup_name')[0].innerHTML,'description':document.getElementsByClassName('js-startup_high_concept')[0].innerHTML,'location':document.getElementsByClassName('js-location_tags')[0].innerHTML,'url':document.getElementsByClassName('u-uncoloredLink company_url')[0].innerHTML}});"});
+    		code: "chrome.storage.sync.set({'info':{'image':document.getElementsByClassName('company-logo')[0].innerHTML,'title':document.getElementsByClassName('js-startup_name')[0].innerHTML,'description':document.getElementsByClassName('js-startup_high_concept')[0].innerHTML,'location':document.getElementsByClassName('js-location_tags')[0].innerHTML,'url':document.getElementsByClassName('u-uncoloredLink company_url')[0].innerHTML,'source':window.location.hostname}});"});
 });
 chrome.storage.sync.get('info',function(data){
 	var v = document.getElementById('logo');
@@ -17,6 +17,7 @@ chrome.storage.sync.get('info',function(data){
 	document.getElementById('concept').innerHTML=data.info.description;
 	document.getElementById('location').innerHTML=data.info.location;
 	document.getElementById('link').innerHTML=data.info.url;
+    document.getElementById('source').innerHTML=data.info.source;
     newdata = data.info;
 });	
 chrome.runtime.onMessage.addListener(function(request) {
@@ -27,7 +28,7 @@ var button = document.getElementById('post')
 
 button.addEventListener('click',function(){
     //console.log("inside jquery");
-    $.post("https://beta.crowdproduct.com/api/product",{
+    $.post("https://app.crowdproduct.com/api/product",{
         image:newdata.image,
         title:newdata.title,
         description:newdata.description,
